@@ -430,10 +430,10 @@ def send_and_confirm_raw_transaction(signed_tx, endpoint=_default_endpoint, time
     -------------
     https://api.hmny.io/#f40d124a-b897-4b7c-baf3-e0dedf8f40a0
     """
-    tx_hash = send_raw_transaction(signed_tx)
+    tx_hash = send_raw_transaction(signed_tx, endpoint=endpoint)
     start_time = time.time()
     while((time.time() - start_time) <= timeout):
-        tx_response = get_transaction_by_hash(tx_hash)
+        tx_response = get_transaction_by_hash(tx_hash, endpoint=endpoint)
         if tx_response is not None:
             if tx_response[ 'blockHash' ] != '0x0000000000000000000000000000000000000000000000000000000000000000':
                 return tx_response
